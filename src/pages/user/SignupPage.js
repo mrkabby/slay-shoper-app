@@ -1,8 +1,6 @@
-import { React,useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
-import axios from 'axios';
-import { toast } from 'react-toastify'; 
-
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -10,9 +8,10 @@ const SignUpPage = () => {
     email: "",
     password: "",
     username: "",
-    
+    firstName: "",
+    lastName: "",
   });
-  const { email, password, username, } = inputValue;
+  const { email, password, username, firstName, lastName } = inputValue;
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -34,29 +33,39 @@ const SignUpPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
-        "https://fakestoreapi.com/auth/signup",
-        {
-          ...inputValue,
+      const response = await fetch('https://fakestoreapi.com/users', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
         },
-        { withCredentials: true }
-      );
-      const { success, message } = data;
-      if (success) {
-        handleSuccess(message);
+        body: JSON.stringify({
+          email,
+          username,
+          password,
+          name: {
+            firstname: firstName,
+            lastname: lastName
+          }
+        })
+      });
+      const data = await response.json();
+      if (response.ok) {
+        handleSuccess("User created successfully!");
         setTimeout(() => {
           navigate("/");
         }, 1000);
       } else {
-        handleError(message);
+        handleError(data.message || "Failed to create user");
       }
     } catch (error) {
       console.log(error);
+      handleError("An error occurred while creating user");
     }
   };
 
+
   return (
-    <div className="h-screen bg-black dark:bg-gray-900 flex justify-center px-6 py-12">
+    <div className=" bg-black dark:bg-gray-900 flex justify-center px-6 py-12">
       <div className="justify-center w-full xl:w-3/4 lg:w-11/12 flex">
         <div className="w-full h-auto bg-gray-400 dark:bg-gray-800 hidden lg:block lg:w-5/12 bg-cover rounded-l-lg"
           style={{ backgroundImage: "url('https://scontent.facc5-2.fna.fbcdn.net/v/t1.6435-9/93652177_3185208064832299_4820222254199603200_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeFkiEB4rfmagThPjwHM2xdqi5o4MvZLb3SLmjgy9ktvdCrXjSuBqvIxbxYSdcElOQfX31Ws6oZ1922vvAo3xtuL&_nc_ohc=B1uKPdAhxOIAb6EpSQF&_nc_ht=scontent.facc5-2.fna&oh=00_AfACx3ZuMqSFoprC991cCFK-DXvNaVnGngkJ2nt8cvz00A&oe=6647A2B7')" }}></div>
