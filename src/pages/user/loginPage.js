@@ -94,7 +94,7 @@ const LoginPage = () => {
               <p className="text-xs italic text-red-500">Please enter your password.</p>
             </div>
             <div className="mb-6 text-center">
-              <button
+              <button onClick={()=>navigate("/store")}
                 className="w-full px-4 py-2 font-bold text-white bg-red-500 rounded-full hover:bg-red-700 dark:bg-blue-700 dark:text-white dark:hover:bg-black focus:outline-none focus:shadow-outline"
                 type="button"
               >

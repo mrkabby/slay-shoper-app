@@ -55,6 +55,7 @@ export default function Profile() {
             </span>
           </h3>
           <hr border-black />
+          
         </div>
       </div>
 

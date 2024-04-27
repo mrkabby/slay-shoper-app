@@ -3,10 +3,9 @@ import Navbar from "../../component/navbar";
 import Footer from "../../component/footer";
 import { useNavigate } from "react-router-dom";
 
-
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const fetchData = () => {
     fetch("https://fakestoreapi.com/products")
@@ -22,6 +21,18 @@ const ProductsPage = () => {
     fetchData();
   }, []);
 
+  const handleProductClick = (product) => {
+    // Retrieve existing cart items from localStorage
+    const storedCartItems = localStorage.getItem("cartItems");
+    const cartItems = storedCartItems ? JSON.parse(storedCartItems) : [];
+
+    // Add the clicked product to the cart
+    cartItems.push(product);
+
+    // Update the cart items in localStorage
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  };
+  
  
 
   return (
@@ -46,11 +57,12 @@ const ProductsPage = () => {
                   />
                   <div className="absolute inset-0 bg-black opacity-40"></div>
                   <div className="absolute inset-0 flex items-center justify-center">
-                   
-                    <button className="bg-white text-gray-900 py-2 px-6 rounded-full font-bold hover:bg-gray-300" onClick={()=>navigate(`/productdetails/${product.id}`)}>
+                    <button
+                      className="bg-white text-gray-900 py-2 px-6 rounded-full font-bold hover:bg-gray-300"
+                      onClick={()=>navigate(`/productdetails/${product.id}`)}
+                    >
                       View Product
                     </button>
-                    
                   </div>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mt-4">
@@ -61,8 +73,11 @@ const ProductsPage = () => {
                   <span className="text-gray-900 font-bold text-lg">
                     ${product.price}
                   </span>
-                  <button className="bg-red-500 text-white py-2 px-4 rounded-full font-bold hover:bg-red-900">
-                   Add to Cart 
+                  <button
+                    className="bg-red-500 text-white py-2 px-4 rounded-full font-bold hover:bg-red-900"
+                    onClick={() => handleProductClick(product)}
+                  >
+                    Add to Cart
                   </button>
                 </div>
               </div>

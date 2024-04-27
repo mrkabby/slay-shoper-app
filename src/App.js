@@ -5,13 +5,14 @@ import LandingPage from './pages/user/landingPage';
 import LoginPage from './pages/user/loginPage';
 
 import ProductsPage from './pages/user/productsPage';
-import ShoppingCart from './pages/user/shoppingcart';
+
 import Checkoutpage from './pages/user/checkoutPage';
 import Profile from './pages/user/profilePage';
 import AdminLogin from './pages/admin/adminLogin';
 import ProductDetailsPage from './pages/user/productDetailsPage';
 import SignUpPage from './pages/user/SignupPage';
 import AdminDasboard from './pages/admin/admindashboard';
+import CartPage from './pages/user/cartPage';
 
 
 
@@ -20,7 +21,7 @@ const router = createBrowserRouter ([
     { path: '/login', element: <LoginPage/> },
     { path: '/register', element: <SignUpPage/> },
     { path: '/store', element: <ProductsPage /> },
-    { path: '/cart', element: <ShoppingCart /> },
+    { path: '/cart', element: <CartPage /> },
     { path: '/checkout', element: <Checkoutpage /> },
     { path: '/profile', element: <Profile/> },
     { path: '/adminlogin', element: <AdminLogin/> },

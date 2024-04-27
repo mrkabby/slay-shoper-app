@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 const ProductDetailsPage = () => {
   const [product, setProduct] = useState({});
   const {id}=useParams();
+  const notify = () => toast("To add to cart you must login");
+
 
   const fetchData = () => {
     fetch( `https://fakestoreapi.com/products/${id}`)
@@ -61,12 +64,13 @@ const ProductDetailsPage = () => {
           </ul>
           
           <div className="flex items-center mt-6">
-            <button
+           
+           <button
               className="px-8 py-2 bg-red-500 text-white text-sm font-medium rounded hover:bg-red-900 focus:outline-none focus:bg-zinc-800"
-            >
+              onClick={notify}>
               Add to cart
             </button>
-            
+          <ToastContainer />
           </div>
         </div>
       </div>
