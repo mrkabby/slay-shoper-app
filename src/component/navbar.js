@@ -70,7 +70,7 @@ sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                         aria-hidden="true"
                       />
                       <span className="ml-2 text-sm font-medium text-gray-700
-group-hover:text-gray-800">0</span>
+group-hover:text-gray-800"></span>
                       <span className="sr-only">items in cart, view bag</span>
                     </a>
                   </div>
